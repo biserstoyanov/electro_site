@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Публикувай заявка{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Публикувай заявка</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input name="title" class="form-control mb-3" placeholder="Заглавие">
+
+    <textarea name="description" class="form-control mb-3"
+              placeholder="Описание"></textarea>
+
+    <input name="city" class="form-control mb-3" placeholder="Град">
+
+    <input name="budget" type="number" class="form-control mb-3"
+           placeholder="Бюджет">
+
+    <input name="phone" class="form-control mb-3"
+           placeholder="Телефон">
+
+    <button class="btn btn-warning">Публикувай</button>
+</form>
+
+{% endblock %}

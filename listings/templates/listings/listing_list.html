@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Всички заявки{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Всички заявки</h2>
+
+<form method="get" class="mb-4">
+    <input type="text" name="city" placeholder="Търси по град"
+           class="form-control">
+</form>
+
+<div class="row">
+{% for listing in listings %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            {% if listing.image %}
+                <img src="{{ listing.image.url }}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h5>
+                    <a href="/listings/{{ listing.slug }}/">
+                        {{ listing.title }}
+                    </a>
+                </h5>
+                <p>{{ listing.description|truncatechars:100 }}</p>
+                <p class="text-muted">
+                    📍 {{ listing.city }} | 💰 {{ listing.budget }} лв.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

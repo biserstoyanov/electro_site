@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+{% block meta_description %}{{ listing.description|truncatechars:160 }}{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+    {% if listing.image %}
+        <img src="{{ listing.image.url }}" class="card-img-top">
+    {% endif %}
+
+    <div class="card-body">
+        <h2>{{ listing.title }}</h2>
+        <p>{{ listing.description }}</p>
+
+        <p><strong>Град:</strong> {{ listing.city }}</p>
+        <p><strong>Бюджет:</strong> {{ listing.budget }} лв.</p>
+        <p><strong>Телефон:</strong> {{ listing.phone }}</p>
+    </div>
+</div>
+
+{% endblock %}

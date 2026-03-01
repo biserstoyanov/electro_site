@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+      content="Професионален електротехник в София. Аварийни електро услуги 24/7, бърза реакция до 30 минути. Коректни цени и гаранция за качество. Обадете се сега!">
+
+    <title>{% block title %} {{ site_name }} Електротехник София | Аварийни Електро Услуги 24/7 {% endblock %}</title>
+    <meta name="description"
+          content="{% block meta_description %}Професионални електро услуги{% endblock %}">
+<style>
+@media (max-width: 768px) {
+    .hero {
+        padding: 80px 15px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f6fa;
+}
+
+.navbar {
+    background: #111;
+}
+
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                url('https://images.unsplash.com/photo-1581092919535-7146ff1a590b');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 140px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.btn-warning {
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.contact-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+footer {
+    background: #111;
+    color: white;
+    padding: 30px;
+}
+</style>
+
+</head>
+<a href="tel:+359888123456"
+   style="
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   background: #ffc107;
+   color: black;
+   padding: 15px 18px;
+   border-radius: 50%;
+   font-size: 22px;
+   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+   text-decoration: none;
+   z-index: 999;">
+📞
+</a>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "{{ site_name }}",
+  "image": "",
+  "telephone": "{{ company_number }}",
+  "areaServed": "Sofia",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{ city }}",
+    "addressCountry": "BG"
+  }
+}
+</script>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container">
+        <a class="navbar-brand text-warning fw-bold" href="/">
+            {{ site_name }}
+        </a>
+<!--        <img class="logo" src="{% static 'images/logo.jpg' %}" alt="Лого" width="80" height="80">-->
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Начало</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/services/">Услуги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/prices/">Цени</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact/">Контакти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block hero %}{% endblock %}
+
+<div class="container py-5">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="text-center" >
+    <p>📞 {{ company_number }}</p>
+    <p>© 2026 {{ site_name }}</p>
+</footer>
+
+</body>
+</html>

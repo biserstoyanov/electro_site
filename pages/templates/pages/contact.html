@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Контакти | {{ site_name }}{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center section-title">Свържи се с нас 📞</h1>
+<div class="mt-5 text-center">
+    <h4>📍 Нашият район на обслужване</h4>
+    <p>София и околностите</p>
+
+    <iframe
+        width="350"
+        height="350"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5865.940497553428!2d23.242300597636724!3d42.68317253465869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa9b1ee04ab90d%3A0xad70dd30a73fb85d!2z0LYu0LouINCe0LLRh9CwINC60YPQv9C10LsgMiwg0KHQvtGE0LjRjw!5e0!3m2!1sbg!2sbg!4v1771445604945!5m2!1sbg!2sbg">"
+        style="border:0; border-radius:12px;"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="contact-box">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Honeypot anti-spam -->
+                <input type="text" name="website" style="display:none">
+
+                <div class="mb-3">
+                    <label>Име</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Телефон</label>
+                    <input type="text" name="phone" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Съобщение</label>
+                    <textarea name="message" rows="5"
+                              class="form-control" required></textarea>
+                </div>
+
+                <button class="btn btn-warning w-100">
+                    Изпрати запитване
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
