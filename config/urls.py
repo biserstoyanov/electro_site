@@ -20,6 +20,8 @@ from django.contrib.sitemaps.views import sitemap
 from .sitemaps import ListingSitemap
 from django.conf import settings
 from django.conf.urls.static import static
+
+
 sitemaps = {
     'listings': ListingSitemap,
 }
@@ -30,5 +32,6 @@ urlpatterns = [
     path('listings/', include('listings.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path("services/", include("services.urls")),
+    path("about/", include("about.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

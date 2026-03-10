@@ -19,9 +19,6 @@ def prices(request):
     return render(request, "pages/prices.html")
 
 
-
-
-
 def contact(request):
     if request.method == "POST":
         name = request.POST.get("name")
