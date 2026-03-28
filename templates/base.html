@@ -2,164 +2,176 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-      content="Професионален електротехник в София. Аварийни електро услуги 24/7, бърза реакция до 30 минути. Коректни цени и гаранция за качество. Обадете се сега!">
 
-    <title>{% block title %} {{ site_name }} Електротехник София | Аварийни Електро Услуги 24/7 {% endblock %}</title>
-    <meta name="description"
-          content="{% block meta_description %}Професионални електро услуги{% endblock %}">
-<style>
-@media (max-width: 768px) {
-    .hero {
-        padding: 80px 15px;
-    }
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
-    .hero h1 {
-        font-size: 28px;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    .hero p {
-        font-size: 16px;
-    }
-}
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f6fa;
+        }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f5f6fa;
-}
+        .navbar {
+            background: #111;
+        }
 
-.navbar {
-    background: #111;
-}
+        /* HERO */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        url('https://images.unsplash.com/photo-1581092919535-7146ff1a590b');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 20px;
+            text-align: center;
+            overflow: hidden;
+        }
 
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-                url('https://images.unsplash.com/photo-1581092919535-7146ff1a590b');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 140px 20px;
-    text-align: center;
-}
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+        }
 
-.section-title {
-    font-weight: 700;
-    margin-bottom: 40px;
-}
+        .hero p {
+            font-size: 20px;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
 
-.card {
-    border: none;
-    border-radius: 12px;
-    transition: 0.3s ease;
-}
+        .hero .btn {
+            margin-top: 25px;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 10px;
+            position: relative;
+            z-index: 3;
+        }
 
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
 
-.btn-warning {
-    font-weight: 600;
-    padding: 10px 20px;
-}
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.contact-box {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
+        .delay-1 { transition-delay: 0.3s; }
+        .delay-2 { transition-delay: 0.6s; }
 
-footer {
-    background: #111;
-    color: white;
-    padding: 30px;
-}
-</style>
+        /* Lightning effect */
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+            opacity: 0;
+            animation: flash 5s infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
 
+        @keyframes flash {
+            0%, 95%, 100% { opacity: 0; }
+            96% { opacity: 0.4; }
+            97% { opacity: 0; }
+            98% { opacity: 0.6; }
+            99% { opacity: 0; }
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-<a href="tel:+359888123456"
-   style="
-   position: fixed;
-   bottom: 20px;
-   right: 20px;
-   background: #ffc107;
-   color: black;
-   padding: 15px 18px;
-   border-radius: 50%;
-   font-size: 22px;
-   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-   text-decoration: none;
-   z-index: 999;">
-📞
-</a>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Electrician",
-  "name": "{{ site_name }}",
-  "image": "",
-  "telephone": "{{ company_number }}",
-  "areaServed": "Sofia",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "{{ city }}",
-    "addressCountry": "BG"
-  }
-}
-</script>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow">
     <div class="container">
-        <a class="navbar-brand text-warning fw-bold" href="/">
-            {{ site_name }}
-        </a>
-<!--        <img class="logo" src="{% static 'images/logo.jpg' %}" alt="Лого" width="80" height="80">-->
+        <a class="navbar-brand text-warning fw-bold" href="/">{{ site_name }}</a>
 
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Начало</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/services/">Услуги</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/prices/">Цени</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact/">Контакти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about/">За нас</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/">Начало</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about/">За нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services/">Услуги</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact/">Контакти</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-{% block hero %}{% endblock %}
+<!-- HERO BLOCK (само за начална) -->
+{% block hero %}
+<section class="hero">
+    <h1 class="fade-in">Електро услуги без компромис</h1>
+    <p class="fade-in delay-1">Бързо • Сигурно • Професионално</p>
+    <a href="/contact/" class="btn btn-warning fade-in delay-2">Обади се сега</a>
+</section>
+{% endblock %}
 
+<!-- CONTENT -->
+{% block content_wrapper %}
 <div class="container py-5">
     {% block content %}{% endblock %}
 </div>
+{% endblock %}
 
-<footer class="text-center" >
+<!-- FLOAT BUTTON -->
+<a href="tel:+359888123456"
+   style="position: fixed; bottom: 20px; right: 20px; background: #ffc107; color: black; padding: 15px 18px; border-radius: 50%; font-size: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-decoration: none; z-index: 999;">
+📞
+</a>
+
+<!-- FOOTER -->
+<footer class="text-center">
     <p>📞 {{ company_number }}</p>
     <p>© 2026 {{ site_name }}</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// animation on load
+window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-in').forEach(el => {
+        el.classList.add('show');
+    });
+});
+</script>
 
 </body>
 </html>
