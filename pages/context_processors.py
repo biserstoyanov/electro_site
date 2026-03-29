@@ -1,6 +1,6 @@
 def global_variables(request):
     return {
-        "site_name": "Стан Електрик 🗲",
+        "site_name": "СтанЕлектрик 🗲",
         "company_email": "stanelektrik.office@gmail.com",
-        "company_number": "+359886184477",
+        "company_number": "+359893687285",
     }

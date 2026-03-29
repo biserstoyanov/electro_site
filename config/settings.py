@@ -5,9 +5,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY",default="test")
 DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["stanelectric.energy","www.stanelectric.energy","130.204.145.28"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -61,12 +61,20 @@ DATABASES = {
 }
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+#STATIC_ROOT = BASE_DIR / "/opt/electro_site/staticfiles"
+STATIC_ROOT = '/opt/electro_site/staticfiles'
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / "/opt/electro_site/media"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your_app_password'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+WSGI_APPLICATION = 'config.wsgi.application'
