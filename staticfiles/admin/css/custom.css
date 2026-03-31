@@ -1,0 +1,18 @@
+body {
+    background-color: #111;       /* тъмен фон */
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#header {
+    background-color: #222;       /* custom header */
+}
+
+.module h2, .module caption {
+    color: #ffc107;               /* заглавия на модули */
+}
+
+.dashboard {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}

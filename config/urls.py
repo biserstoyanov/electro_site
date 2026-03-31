@@ -15,23 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include,reverse
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import ListingSitemap
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps import Sitemap
 sitemaps = {
     'listings': ListingSitemap,
 }
+class StaticViewSitemap(Sitemap):
+    priority = 0.8
+    changefreq = 'weekly'
 
+    def items(self):
+        return ['home', 'about', 'services', 'contact']
+
+    def location(self, item):
+        return reverse(item)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pages.urls')),
-    path('listings/', include('listings.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
-    path("services/", include("services.urls")),
-    path("about/", include("about.urls")),
-    path("products/", include("products.urls")),
+    path('', include('pages.urls'),name='home'),
+    path('listings/', include('listings.urls'),name='listings'),
+    path("services/", include("services.urls"),name='services'),
+    path("about/", include("about.urls"),name='about'),
+    path("products/", include("products.urls"),name='products'),
+    path('sitemap.xml', sitemap, {'sitemaps': {'static': StaticViewSitemap}}),
+    
     
     
 ]

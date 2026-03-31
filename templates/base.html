@@ -3,7 +3,12 @@
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="електротехник София, електро услуги София, аварии ток, електро ремонти">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="СтанЕлектрик - Електротехник София">
+    <meta property="og:description" content="Професионални електро услуги в София">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com">
 
     <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
@@ -111,6 +116,26 @@
             }
         }
     </style>
+    
+    <script type="application/ld+json"> 
+   
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "СтанЕлектрик",
+  "image": "https://stanelectric.energy/static/images/logo.png",
+  "url": "https://stanelectric.energy",
+  "telephone": "+359893687285",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sofia",
+    "addressCountry": "BG"
+  },
+  "areaServed": "Sofia",
+  "priceRange": "20$"
+}
+</script>
+    </script>    
 </head>
 <body>
 
@@ -158,13 +183,21 @@
 
 <!-- FOOTER -->
 <footer class="text-center">
-    <p>📞 {{ company_number }}</p>
-    <p>© 2026 {{ site_name }}</p>
+
+        <a href="/" class="d-inline-block">
+        <img src="{% static 'images/logo.jpg' %}"
+             alt="{{ site_name }}"
+             class="img-fluid"
+             style="height:110px;">
+    </a>
+        <p>📞 {{ company_number }}</p>
+        <p>© 2026 {{ site_name }}</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    
 // animation on load
 window.addEventListener('load', () => {
     document.querySelectorAll('.fade-in').forEach(el => {
