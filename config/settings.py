@@ -7,7 +7,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("SECRET_KEY",default="test")
 DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = ["stanelectric.energy","www.stanelectric.energy","130.204.145.28","*"]
+ALLOWED_HOSTS = ["stanelectric.energy","www.stanelectric.energy"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
