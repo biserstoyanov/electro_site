@@ -1,9 +1,10 @@
+import requests
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.core.mail import send_mail
 from django.conf import settings
 
 from .models import Listing
+
+API_KEY = ''
 
 
 def listing_list(request):
@@ -25,25 +26,68 @@ def listing_detail(request, slug):
     })
 
 
+# -----------------------------
+# BREVO EMAIL FUNCTION
+# -----------------------------
+def send_email(to_email, subject, content):
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": API_KEY,
+        "content-type": "application/json"
+    }
+
+    data = {
+        "sender": {"email": "info@stanelectric.energy"},
+        "to": [{"email": to_email}],
+        "subject": subject,
+        "htmlContent": content
+    }
+
+    r = requests.post(url, json=data, headers=headers)
+    return r.json()
+
+
+# -----------------------------
+# CREATE LISTING + EMAIL
+# -----------------------------
 def listing_create(request):
     if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        city = request.POST.get("city")
+        budget = request.POST.get("budget")
+        phone = request.POST.get("phone")
+        category = request.POST.get("category")
+
         Listing.objects.create(
-            title=request.POST.get("title"),
-            description=request.POST.get("description"),
-            city=request.POST.get("city"),
-            budget=request.POST.get("budget"),
-            phone=request.POST.get("phone"),
-            category_id=request.POST.get("category"),
+            title=title,
+            description=description,
+            city=city,
+            budget=budget,
+            phone=phone,
+            category_id=category,
         )
 
-        # email известие
+        # 📧 СЪЗДАВАМЕ HTML СЪОБЩЕНИЕ С ДАННИТЕ ОТ ФОРМАТА
+        email_content = f"""
+        <h2>Нова клиентска заявка</h2>
+
+        <b>Заглавие:</b> {title}<br>
+        <b>Описание:</b> {description}<br>
+        <b>Град:</b> {city}<br>
+        <b>Бюджет:</b> {budget}<br>
+        <b>Телефон:</b> {phone}<br>
+        <b>Категория ID:</b> {category}<br>
+        """
+
+        # 📬 пращаме към твоя имейл
         if settings.EMAIL_HOST_USER:
-            send_mail(
-                "Нова заявка",
-                "Имате нова клиентска заявка.",
+            send_email(
                 settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER],
-                fail_silently=True,
+                f"Нова заявка от {city}",
+                email_content
             )
 
         return redirect("home")
